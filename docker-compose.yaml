@@ -21,7 +21,7 @@ services:
     image: joindevops/mysql:v1
     container_name: mysql
     volumes:
-    -mysql: v1
+    - mysql:var/lib/mysql
   rabbit mq:
     image: rabbitmq:3
     container_name: rabbitmq
