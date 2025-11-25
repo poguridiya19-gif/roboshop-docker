@@ -15,7 +15,9 @@ services:
     - mongodb:/data/db
   redis:
     image: redis:7.0
-    container_name: mongodb
+    container_name: redis
+    volumes:
+    - redis:/data
   mysql:
     build: ./mysql
     image: joindevops/mysql:v1
