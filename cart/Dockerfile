@@ -1,10 +1,35 @@
-FROM node:20
+FROM node:20.19.5-alpine3.22 AS build
 WORKDIR /opt/server
-EXPOSE 8080
 COPY package.json .
 COPY *.js .
+# this may add extra cache memory
 RUN npm install
-ENV REDIS_HOST="redis" \
-ENV CATALOGUE_HOST="catalogue" \
-ENV  CATALOGUE_PORT="8080"
-CMD ["node", "server.js"]
+
+FROM node:20.19.5-alpine3.22
+# Create a group and user
+WORKDIR /opt/server
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
+    chown -R roboshop:roboshop /opt/server
+EXPOSE 8080
+LABEL com.project="roboshop" \
+      components="catalogue" \
+      created_by="siva kumar" 
+ENV REDIS_HOST=redis \
+    CATALOGUE_HOST= catalogue \
+    CATALOGUE_PORT=8080
+COPY --from=build /opt/server /opt/server
+USER roboshop
+CMD ["server.js"]
+ENTRYPOINT ["node"]
+
+
+# FROM node:20
+# WORKDIR /opt/server
+# EXPOSE 8080
+# COPY package.json .
+# COPY *.js .
+# RUN npm install
+# ENV REDIS_HOST=redis \
+#     CATALOGUE_HOST= catalogue \
+#     CATALOGUE_PORT=8080
+# CMD ["node", "server.js"]
