@@ -28,8 +28,8 @@ services:
     volumes: # -v rabbitmq:/var/lib/rabbitmq
     - rabbitmq:/var/lib/rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER:roboshop 
-      RABBITMQ_DEFAULT_PASS:roboshop123
+      RABBITMQ_DEFAULT_USER: roboshop 
+      RABBITMQ_DEFAULT_PASS: roboshop123
   user:
     build: ./user
     image: joindevops/user:v1
