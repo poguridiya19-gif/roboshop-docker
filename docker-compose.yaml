@@ -22,7 +22,7 @@ services:
     container_name: mysql
     volumes:
     - mysql:var/lib/mysql
-  rabbit mq:
+  rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
     volumes: # -v rabbitmq:/var/lib/rabbitmq
