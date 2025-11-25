@@ -15,7 +15,7 @@ LABEL com.project="roboshop" \
       components="catalogue" \
       created_by="siva kumar" 
 ENV REDIS_HOST=redis \
-    CATALOGUE_HOST= catalogue \
+    CATALOGUE_HOST=catalogue \
     CATALOGUE_PORT=8080
 COPY --from=build /opt/server /opt/server
 USER roboshop
